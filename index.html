@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV Builder Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+      /* Custom Print Styles to ensure 100% match and no browser headers/footers */
+      @media print {
+        @page {
+          margin: 0;
+          size: auto; 
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          background: white;
+        }
+        /* Hide everything by default when printing */
+        body * {
+          visibility: hidden;
+        }
+        /* Only show the resume container */
+        #resume-preview, #resume-preview * {
+          visibility: visible;
+        }
+        #resume-preview {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          overflow: visible;
+        }
+      }
+
+      /* Screen specific utilities */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-100 text-gray-800 font-sans">
+    <div id="root"></div>
+  </body>
+</html>
