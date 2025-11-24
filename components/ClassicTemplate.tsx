@@ -21,7 +21,7 @@ const ClassicTemplate: React.FC<Props> = ({ data }) => {
   };
 
   return (
-    <div className="w-[210mm] print:w-full min-h-[297mm] bg-white text-black font-serif p-10 print:p-10 mx-auto print:mx-0 shadow-lg print:shadow-none box-border leading-relaxed text-sm">
+    <div className="w-[210mm] print:w-full min-h-[297mm] bg-white text-black font-serif p-[25.4mm] mx-auto print:mx-0 shadow-lg print:shadow-none box-border leading-relaxed text-sm">
       {/* Header */}
       <div className="text-center mb-6">
         <h1 className="text-3xl font-bold mb-2 uppercase tracking-wide">{personalInfo.fullName}</h1>
