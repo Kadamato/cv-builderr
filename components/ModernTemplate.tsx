@@ -22,7 +22,7 @@ const ModernTemplate: React.FC<Props> = ({ data }) => {
   };
 
   return (
-    <div className="w-[210mm] min-h-[297mm] bg-white flex shadow-lg mx-auto font-sans overflow-hidden">
+    <div className="w-[210mm] print:w-full min-h-[297mm] bg-white flex shadow-lg print:shadow-none mx-auto print:mx-0 font-sans overflow-hidden">
       
       {/* Sidebar (Left) */}
       <div className="w-[35%] bg-[#a83246] text-white p-6 flex flex-col items-center pt-10">
