@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ClassicTemplate: React.FC<Props> = ({ data }) => {
-  const { personalInfo, education, experience, activities, skills, projects } = data;
+  const { personalInfo, education, experience, activities, skills, projects, certifications } = data;
 
   const renderBullets = (text: string) => {
     if (!text) return null;
@@ -103,6 +103,32 @@ const ClassicTemplate: React.FC<Props> = ({ data }) => {
                 <span>{exp.startDate} – {exp.endDate}</span>
               </div>
               {renderBullets(exp.description)}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Certifications */}
+      {certifications && certifications.length > 0 && (
+        <div className="mb-5">
+          <h2 className="uppercase font-bold border-b border-black mb-2 text-sm tracking-wider">Certifications</h2>
+          {certifications.map((cert) => (
+            <div key={cert.id} className="mb-2">
+               <div className="flex justify-between items-baseline">
+                  <div className="flex items-baseline gap-1">
+                      <span className="font-bold text-base">{cert.name}</span>
+                      {cert.link && (
+                          <>
+                              <span className="mx-1">|</span>
+                              <a href={cert.link} target="_blank" rel="noreferrer" className="text-blue-800 hover:underline">Link</a>
+                          </>
+                      )}
+                  </div>
+                  {cert.date && <span className="italic text-gray-800 text-sm">{cert.date}</span>}
+               </div>
+               <div className="text-sm text-gray-800 italic">
+                  Issued by {cert.issuer}
+               </div>
             </div>
           ))}
         </div>

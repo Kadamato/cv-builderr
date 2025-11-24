@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResumeData, Education, Experience, SkillGroup, Project } from '../types';
+import { ResumeData, Education, Experience, SkillGroup, Project, Certification } from '../types';
 import { Trash2, Plus, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface Props {
@@ -89,6 +89,29 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
 
   const removeProject = (id: string) => {
     onChange({ ...data, projects: (data.projects || []).filter(p => p.id !== id) });
+  };
+
+  const addCertification = () => {
+    const newCert: Certification = {
+      id: Date.now().toString(),
+      name: 'Certificate Name',
+      issuer: 'Issuer Name',
+      link: '',
+      date: '2024'
+    };
+    const currentCerts = data.certifications || [];
+    onChange({ ...data, certifications: [...currentCerts, newCert] });
+  };
+
+  const updateCertification = (id: string, field: keyof Certification, value: string) => {
+    onChange({
+      ...data,
+      certifications: (data.certifications || []).map(c => c.id === id ? { ...c, [field]: value } : c)
+    });
+  };
+
+  const removeCertification = (id: string) => {
+    onChange({ ...data, certifications: (data.certifications || []).filter(c => c.id !== id) });
   };
 
   const addSkill = () => {
@@ -262,6 +285,47 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
             ))}
             <button onClick={addProject} className="w-full py-2 flex items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors">
               <Plus size={16} /> Add Project
+            </button>
+          </div>
+        )}
+        
+        {/* Certifications */}
+        <SectionHeader title="Certifications" id="certifications" />
+        {activeSection === 'certifications' && (
+          <div className="p-4 space-y-4 bg-gray-50/50">
+             {(data.certifications || []).map((cert) => (
+              <div key={cert.id} className="p-4 bg-white border border-gray-200 rounded shadow-sm relative group">
+                <button 
+                  onClick={() => removeCertification(cert.id)}
+                  className="absolute top-2 right-2 text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <Trash2 size={16} />
+                </button>
+                
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Certificate Name</label>
+                  <input type="text" placeholder="AWS Certified Cloud Practitioner" className="input-field" value={cert.name} onChange={e => updateCertification(cert.id, 'name', e.target.value)} />
+                </div>
+
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Certificate Link</label>
+                  <input type="text" placeholder="credential.net/..." className="input-field" value={cert.link || ''} onChange={e => updateCertification(cert.id, 'link', e.target.value)} />
+                </div>
+
+                <div className="mb-2">
+                   <label className="text-xs text-gray-500 font-semibold uppercase">Issued by</label>
+                   <input type="text" placeholder="Amazon Web Services" className="input-field" value={cert.issuer} onChange={e => updateCertification(cert.id, 'issuer', e.target.value)} />
+                </div>
+                
+                 <div className="mb-2">
+                   <label className="text-xs text-gray-500 font-semibold uppercase">Date (Optional)</label>
+                   <input type="text" placeholder="May 2024" className="input-field" value={cert.date || ''} onChange={e => updateCertification(cert.id, 'date', e.target.value)} />
+                </div>
+
+              </div>
+            ))}
+            <button onClick={addCertification} className="w-full py-2 flex items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors">
+              <Plus size={16} /> Add Certification
             </button>
           </div>
         )}

@@ -28,6 +28,14 @@ export interface Project {
   description: string;
 }
 
+export interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+  link?: string;
+  date?: string;
+}
+
 export interface SkillGroup {
   id: string;
   category: string;
@@ -49,7 +57,8 @@ export interface ResumeData {
   };
   education: Education[];
   experience: Experience[];
-  projects: Project[]; // Added projects
+  projects: Project[];
+  certifications?: Certification[]; // Added certifications
   skills: SkillGroup[];
   activities?: Experience[]; // Reusing experience structure for generic activities
 }

@@ -50,6 +50,15 @@ const INITIAL_DATA: ResumeData = {
       description: 'Contribute as front end. Developed the Antar Exchange interface using Next.js, optimizing SSR/ISR for better performance and SEO. Built a smooth UI with Tailwind CSS, enhancing user experience. Integrated WebSocket for real-time price updates, improving API efficiency. Managed state effectively with React Query, reducing unnecessary API calls. Designed reusable components, ensuring a clean and maintainable codebase.'
     }
   ],
+  certifications: [
+    {
+      id: '1',
+      name: 'Certified Public Accountant (CPA)',
+      issuer: 'AICPA',
+      link: 'https://www.aicpa-cima.com',
+      date: '2022'
+    }
+  ],
   skills: [
     { id: '1', category: 'Technical', items: 'Advanced MS Excel, SAP, Xero' },
     { id: '2', category: 'Professional', items: 'Financial Regulations, Statistics' }
@@ -68,8 +77,13 @@ function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // Merge with initial data structure to ensure new fields (like projects) exist if they were missing in saved data
-        setResumeData({ ...INITIAL_DATA, ...parsed, projects: parsed.projects || [] });
+        // Merge with initial data structure to ensure new fields (like projects, certifications) exist if they were missing
+        setResumeData({ 
+            ...INITIAL_DATA, 
+            ...parsed, 
+            projects: parsed.projects || [],
+            certifications: parsed.certifications || [] 
+        });
       } catch (e) {
         console.error("Failed to parse saved resume data");
       }
