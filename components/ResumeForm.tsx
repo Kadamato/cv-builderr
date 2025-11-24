@@ -222,20 +222,48 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
                 >
                   <Trash2 size={16} />
                 </button>
-                <div className="grid grid-cols-2 gap-2 mb-2">
-                  <input type="text" placeholder="School" className="input-field" value={edu.school} onChange={e => updateEducation(edu.id, 'school', e.target.value)} />
-                  <input type="text" placeholder="Degree" className="input-field" value={edu.degree} onChange={e => updateEducation(edu.id, 'degree', e.target.value)} />
+                
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 font-semibold uppercase">School</label>
+                  <input type="text" className="input-field" value={edu.school} onChange={e => updateEducation(edu.id, 'school', e.target.value)} />
                 </div>
-                <div className="grid grid-cols-2 gap-2 mb-2">
-                  <input type="text" placeholder="City" className="input-field" value={edu.city} onChange={e => updateEducation(edu.id, 'city', e.target.value)} />
-                  <input type="text" placeholder="Start - End" className="input-field" value={edu.startDate} onChange={e => updateEducation(edu.id, 'startDate', e.target.value)} />
+
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Degree</label>
+                  <input type="text" className="input-field" value={edu.degree} onChange={e => updateEducation(edu.id, 'degree', e.target.value)} />
                 </div>
-                <textarea 
-                  placeholder="Details (Optional)" 
-                  className="input-field w-full h-16 text-sm" 
-                  value={edu.description} 
-                  onChange={e => updateEducation(edu.id, 'description', e.target.value)}
-                />
+
+                <div className="grid grid-cols-2 gap-4 mb-2">
+                  <div>
+                    <label className="text-xs text-gray-500 font-semibold uppercase">City</label>
+                    <input type="text" className="input-field" value={edu.city} onChange={e => updateEducation(edu.id, 'city', e.target.value)} />
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-500 font-semibold uppercase">Country</label>
+                    <input type="text" className="input-field" value={edu.country} onChange={e => updateEducation(edu.id, 'country', e.target.value)} />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-2">
+                  <div>
+                    <label className="text-xs text-gray-500 font-semibold text-gray-600">Start Month / Year</label>
+                    <input type="text" placeholder="MM/YYYY" className="input-field" value={edu.startDate} onChange={e => updateEducation(edu.id, 'startDate', e.target.value)} />
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-500 font-semibold text-gray-600">End Month / Year</label>
+                    <input type="text" placeholder="MM/YYYY" className="input-field" value={edu.endDate} onChange={e => updateEducation(edu.id, 'endDate', e.target.value)} />
+                  </div>
+                </div>
+
+                <div>
+                   <label className="text-xs text-gray-500 font-semibold uppercase">Description</label>
+                   <textarea 
+                    placeholder="Details (Optional)" 
+                    className="input-field w-full h-16 text-sm" 
+                    value={edu.description} 
+                    onChange={e => updateEducation(edu.id, 'description', e.target.value)}
+                  />
+                </div>
               </div>
             ))}
             <button onClick={addEducation} className="w-full py-2 flex items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors">
@@ -342,23 +370,48 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
                 >
                   <Trash2 size={16} />
                 </button>
-                <div className="grid grid-cols-2 gap-2 mb-2">
-                  <input type="text" placeholder="Company" className="input-field" value={exp.company} onChange={e => updateExperience(exp.id, 'company', e.target.value)} />
-                  <input type="text" placeholder="Position" className="input-field" value={exp.position} onChange={e => updateExperience(exp.id, 'position', e.target.value)} />
+                
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Company</label>
+                  <input type="text" className="input-field" value={exp.company} onChange={e => updateExperience(exp.id, 'company', e.target.value)} />
                 </div>
-                <div className="grid grid-cols-2 gap-2 mb-2">
-                  <input type="text" placeholder="City/State" className="input-field" value={exp.city} onChange={e => updateExperience(exp.id, 'city', e.target.value)} />
-                  <div className="flex gap-1">
-                     <input type="text" placeholder="Start" className="input-field w-1/2" value={exp.startDate} onChange={e => updateExperience(exp.id, 'startDate', e.target.value)} />
-                     <input type="text" placeholder="End" className="input-field w-1/2" value={exp.endDate} onChange={e => updateExperience(exp.id, 'endDate', e.target.value)} />
+
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Position</label>
+                  <input type="text" className="input-field" value={exp.position} onChange={e => updateExperience(exp.id, 'position', e.target.value)} />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-2">
+                  <div>
+                    <label className="text-xs text-gray-500 font-semibold uppercase">City</label>
+                    <input type="text" className="input-field" value={exp.city} onChange={e => updateExperience(exp.id, 'city', e.target.value)} />
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-500 font-semibold uppercase">State</label>
+                    <input type="text" className="input-field" value={exp.state} onChange={e => updateExperience(exp.id, 'state', e.target.value)} />
                   </div>
                 </div>
-                <textarea 
-                  placeholder="Job descriptions (Each new line is a bullet point)" 
-                  className="input-field w-full h-24 text-sm font-mono" 
-                  value={exp.description} 
-                  onChange={e => updateExperience(exp.id, 'description', e.target.value)}
-                />
+
+                <div className="grid grid-cols-2 gap-4 mb-2">
+                   <div>
+                      <label className="text-xs text-gray-500 font-semibold text-gray-600">Start Month / Year</label>
+                      <input type="text" placeholder="MM/YYYY" className="input-field" value={exp.startDate} onChange={e => updateExperience(exp.id, 'startDate', e.target.value)} />
+                   </div>
+                   <div>
+                      <label className="text-xs text-gray-500 font-semibold text-gray-600">End Month / Year</label>
+                      <input type="text" placeholder="MM/YYYY" className="input-field" value={exp.endDate} onChange={e => updateExperience(exp.id, 'endDate', e.target.value)} />
+                   </div>
+                </div>
+
+                <div>
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Description</label>
+                  <textarea 
+                    placeholder="Job descriptions (Each new line is a bullet point)" 
+                    className="input-field w-full h-24 text-sm font-mono" 
+                    value={exp.description} 
+                    onChange={e => updateExperience(exp.id, 'description', e.target.value)}
+                  />
+                </div>
               </div>
             ))}
             <button onClick={addExperience} className="w-full py-2 flex items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors">
