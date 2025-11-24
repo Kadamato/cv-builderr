@@ -20,22 +20,42 @@
           padding: 0;
           background: white;
         }
+        
         /* Hide everything by default when printing */
         body * {
           visibility: hidden;
         }
-        /* Only show the resume container */
+
+        /* Only show the resume container and its children */
         #resume-preview, #resume-preview * {
           visibility: visible;
         }
+
         #resume-preview {
           position: absolute;
           left: 0;
           top: 0;
-          width: 100%;
-          margin: 0;
-          padding: 0;
-          overflow: visible;
+          width: 210mm !important; /* Force A4 width */
+          margin: 0 !important;
+          padding: 0 !important;
+          
+          /* CRITICAL FIXES FOR PDF EXPORT */
+          transform: none !important; /* Remove the preview scaling (0.85) */
+          box-shadow: none !important; /* Remove the outer container shadow/border */
+          background: white !important;
+          
+          /* Ensure height is auto to allow multi-page overflow */
+          height: auto !important;
+          min-height: auto !important;
+          overflow: visible !important;
+          z-index: 9999;
+        }
+
+        /* Remove shadows/borders from the template wrappers inside resume-preview */
+        #resume-preview > div {
+           box-shadow: none !important;
+           border: none !important; /* In case any border is on the wrapper */
+           margin: 0 !important; 
         }
       }
 
