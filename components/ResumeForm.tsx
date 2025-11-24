@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResumeData, Education, Experience, SkillGroup } from '../types';
+import { ResumeData, Education, Experience, SkillGroup, Project } from '../types';
 import { Trash2, Plus, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface Props {
@@ -65,6 +65,30 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
 
   const removeExperience = (id: string) => {
     onChange({ ...data, experience: data.experience.filter(e => e.id !== id) });
+  };
+
+  const addProject = () => {
+    const newProject: Project = {
+      id: Date.now().toString(),
+      name: 'Project Name',
+      technologies: 'Tech Stack',
+      link: '',
+      description: 'Project description...'
+    };
+    // Handle case where projects might be undefined if loading old data
+    const currentProjects = data.projects || [];
+    onChange({ ...data, projects: [...currentProjects, newProject] });
+  };
+
+  const updateProject = (id: string, field: keyof Project, value: string) => {
+    onChange({
+      ...data,
+      projects: (data.projects || []).map(p => p.id === id ? { ...p, [field]: value } : p)
+    });
+  };
+
+  const removeProject = (id: string) => {
+    onChange({ ...data, projects: (data.projects || []).filter(p => p.id !== id) });
   };
 
   const addSkill = () => {
@@ -193,6 +217,51 @@ const ResumeForm: React.FC<Props> = ({ data, onChange }) => {
             ))}
             <button onClick={addEducation} className="w-full py-2 flex items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors">
               <Plus size={16} /> Add Education
+            </button>
+          </div>
+        )}
+
+        {/* Projects */}
+        <SectionHeader title="Projects / Open Source" id="projects" />
+        {activeSection === 'projects' && (
+          <div className="p-4 space-y-4 bg-gray-50/50">
+             {(data.projects || []).map((proj) => (
+              <div key={proj.id} className="p-4 bg-white border border-gray-200 rounded shadow-sm relative group">
+                <button 
+                  onClick={() => removeProject(proj.id)}
+                  className="absolute top-2 right-2 text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <Trash2 size={16} />
+                </button>
+                
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Project Name</label>
+                  <input type="text" placeholder="AntarExchange" className="input-field" value={proj.name} onChange={e => updateProject(proj.id, 'name', e.target.value)} />
+                </div>
+
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Technologies Used</label>
+                  <input type="text" placeholder="Next.js, Tailwind CSS..." className="input-field" value={proj.technologies} onChange={e => updateProject(proj.id, 'technologies', e.target.value)} />
+                </div>
+
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Project Link / GitHub Repository</label>
+                  <input type="text" placeholder="github.com/username/repo" className="input-field" value={proj.link || ''} onChange={e => updateProject(proj.id, 'link', e.target.value)} />
+                </div>
+
+                <div>
+                  <label className="text-xs text-gray-500 font-semibold uppercase">Description</label>
+                  <textarea 
+                    placeholder="Description of the project..." 
+                    className="input-field w-full h-24 text-sm" 
+                    value={proj.description} 
+                    onChange={e => updateProject(proj.id, 'description', e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
+            <button onClick={addProject} className="w-full py-2 flex items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors">
+              <Plus size={16} /> Add Project
             </button>
           </div>
         )}

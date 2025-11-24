@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ClassicTemplate: React.FC<Props> = ({ data }) => {
-  const { personalInfo, education, experience, activities, skills } = data;
+  const { personalInfo, education, experience, activities, skills, projects } = data;
 
   const renderBullets = (text: string) => {
     if (!text) return null;
@@ -55,6 +55,34 @@ const ClassicTemplate: React.FC<Props> = ({ data }) => {
                   {edu.description.split('\n').map((line, i) => <div key={i}>{line}</div>)}
                 </div>
               )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Projects / Open Source */}
+      {projects && projects.length > 0 && (
+        <div className="mb-5">
+          <h2 className="uppercase font-bold border-b border-black mb-2 text-sm tracking-wider">Projects / Open-Source</h2>
+          {projects.map((project) => (
+            <div key={project.id} className="mb-3">
+              <div className="flex justify-between items-baseline mb-1">
+                <div className="flex items-baseline">
+                    <span className="font-bold text-base">{project.name}</span>
+                    {project.link && (
+                        <>
+                            <span className="mx-1">|</span>
+                            <a href={project.link.startsWith('http') ? project.link : `https://${project.link}`} target="_blank" rel="noreferrer" className="text-blue-800 hover:underline">
+                                Link
+                            </a>
+                        </>
+                    )}
+                </div>
+                <span className="italic text-gray-800 text-sm">{project.technologies}</span>
+              </div>
+              <div className="text-sm text-gray-800 text-justify leading-snug">
+                  {project.description}
+              </div>
             </div>
           ))}
         </div>

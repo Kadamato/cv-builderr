@@ -3,7 +3,7 @@ import { ResumeData, TemplateType } from './types';
 import ClassicTemplate from './components/ClassicTemplate';
 import ModernTemplate from './components/ModernTemplate';
 import ResumeForm from './components/ResumeForm';
-import { Save, Printer, ArrowLeft, LayoutTemplate } from 'lucide-react';
+import { Save, Printer, ArrowLeft } from 'lucide-react';
 
 const INITIAL_DATA: ResumeData = {
   personalInfo: {
@@ -41,6 +41,15 @@ const INITIAL_DATA: ResumeData = {
       description: 'Reporting to Finance Manager.\nProcessing purchase ledger transactions.\nSupporting with bank reconciliations.'
     }
   ],
+  projects: [
+    {
+      id: '1',
+      name: 'AntarExchange',
+      technologies: 'Next.js, Tailwind CSS, WebSocket, React Query',
+      link: 'github.com/your-username/repository',
+      description: 'Contribute as front end. Developed the Antar Exchange interface using Next.js, optimizing SSR/ISR for better performance and SEO. Built a smooth UI with Tailwind CSS, enhancing user experience. Integrated WebSocket for real-time price updates, improving API efficiency. Managed state effectively with React Query, reducing unnecessary API calls. Designed reusable components, ensuring a clean and maintainable codebase.'
+    }
+  ],
   skills: [
     { id: '1', category: 'Technical', items: 'Advanced MS Excel, SAP, Xero' },
     { id: '2', category: 'Professional', items: 'Financial Regulations, Statistics' }
@@ -58,7 +67,9 @@ function App() {
     const saved = localStorage.getItem('cv-builder-data');
     if (saved) {
       try {
-        setResumeData(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        // Merge with initial data structure to ensure new fields (like projects) exist if they were missing in saved data
+        setResumeData({ ...INITIAL_DATA, ...parsed, projects: parsed.projects || [] });
       } catch (e) {
         console.error("Failed to parse saved resume data");
       }

@@ -20,6 +20,14 @@ export interface Experience {
   description: string; // Will treat newlines as bullet points
 }
 
+export interface Project {
+  id: string;
+  name: string;
+  technologies: string;
+  link?: string;
+  description: string;
+}
+
 export interface SkillGroup {
   id: string;
   category: string;
@@ -41,6 +49,7 @@ export interface ResumeData {
   };
   education: Education[];
   experience: Experience[];
+  projects: Project[]; // Added projects
   skills: SkillGroup[];
   activities?: Experience[]; // Reusing experience structure for generic activities
 }
